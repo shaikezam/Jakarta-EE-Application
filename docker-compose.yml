@@ -1,0 +1,44 @@
+version: "3.9"
+services:
+  my-app:
+    restart: always
+    container_name: my-app
+    build: my-app
+    ports:
+      - "333:333"
+    networks:
+      - app-network
+
+  db:
+    container_name: db
+    build: db
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: admin
+      MARIADB_USER: admin
+      MARIADB_PASSWORD: admin
+      MARIADB_DATABASE: application
+    ports:
+      - "3306:3306"
+    networks:
+      - app-network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    ports:
+      - "8004:80"
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      MARIADB_ROOT_PASSWORD: admin
+    networks:
+      - app-network
+
+
+networks:
+  app-network:
+    external: false
+    name: app-network
+
