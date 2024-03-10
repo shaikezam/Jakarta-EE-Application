@@ -1,10 +1,19 @@
-package org.example;
+package io.shaikezam;
 
-import jakarta.xml.bind.annotation.XmlRootElement;
 
+import jakarta.enterprise.context.RequestScoped;
+
+@RequestScoped
 public class Person {
     private int id;
     private String name;
+
+    public String lol() {
+        return "lol";
+    }
+
+    public Person() {
+    }
 
     public Person(int id, String name) {
         this.id = id;
