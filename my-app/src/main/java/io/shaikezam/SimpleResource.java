@@ -8,10 +8,10 @@ import jakarta.ws.rs.core.Response;
 
 @Path("/hello")
 @ApplicationScoped
-public class HelloWorldResource {
+public class SimpleResource {
 
     @Inject
-    private Person person;
+    private ISimpleService simpleService;
 
     @GET
     public Response getMessage() {
@@ -21,6 +21,6 @@ public class HelloWorldResource {
     @GET
     @Path("lol")
     public Response getLol() {
-        return Response.ok(person.lol()).build();
+        return Response.ok(simpleService.test()).build();
     }
 }

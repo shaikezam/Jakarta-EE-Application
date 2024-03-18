@@ -16,6 +16,10 @@
         <maven-assembly-plugin.version>3.6.0</maven-assembly-plugin.version>
         <slf4j-nop.version>2.0.12</slf4j-nop.version>
         <jersey.version>3.1.5</jersey.version>
+        <eclipselink.version>4.0.2</eclipselink.version>
+        <lombok.version>1.18.30</lombok.version>
+        <mariadb-java-client.version>3.3.3</mariadb-java-client.version>
+        <flyway-maven-plugin.version>0.10.0</flyway-maven-plugin.version>
     </properties>
     <dependencies>
         <dependency>
@@ -47,16 +51,48 @@
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
             <version>${jakarta.servlet-api.version}</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-nop</artifactId>
-            <version>${slf4j-nop.version}</version>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>eclipselink</artifactId>
+            <version>${eclipselink.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>org.eclipse.persistence.jpa</artifactId>
+            <version>${eclipselink.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <version>${mariadb-java-client.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>1${flyway-maven-plugin.version}</version>
+                <configuration>
+                    <url>jdbc:mysql://db:3306/mydb</url>
+                    <user>admin</user>
+                    <password>admin</password>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.mariadb.jdbc</groupId>
+                        <artifactId>mariadb-java-client</artifactId>
+                        <version>${mariadb-java-client.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
@@ -68,9 +104,10 @@
                             <goal>single</goal>
                         </goals>
                         <configuration>
+                            <appendAssemblyId>false</appendAssemblyId>
                             <archive>
                                 <manifest>
-                                    <mainClass>io.shaikezam.App</mainClass>
+                                    <mainClass>io.shaikezam.WebServer</mainClass>
                                 </manifest>
                             </archive>
                             <descriptorRefs>

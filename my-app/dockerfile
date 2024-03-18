@@ -1,7 +1,7 @@
 FROM alpine:edge
-RUN apk add --no-cache openjdk17
+RUN apk add --no-cache openjdk21
 RUN apk --no-cache add curl
-EXPOSE 333
-COPY target/my-app.jar /app/my-app.jar
+EXPOSE 8080
+COPY target/jakarta-app-1.0-SNAPSHOT.jar /app/app.jar
 WORKDIR /app
-ENTRYPOINT ["java","-jar","my-app.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]

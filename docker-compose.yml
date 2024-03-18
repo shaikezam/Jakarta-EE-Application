@@ -5,7 +5,9 @@ services:
     container_name: my-app
     build: my-app
     ports:
-      - "333:333"
+      - "8080:8080"
+    depends_on:
+      - db
     networks:
       - app-network
 
@@ -33,6 +35,8 @@ services:
       PMA_HOST: db
       PMA_PORT: 3306
       MARIADB_ROOT_PASSWORD: admin
+    depends_on:
+      - db
     networks:
       - app-network
 

@@ -16,10 +16,9 @@ public class WebServer {
         Server server = new Server(8080);
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.setContextPath("/");
-
         ServletHolder servletHolder = context.addServlet(ServletContainer.class, "/rest/*");
         servletHolder.setInitOrder(1);
-        servletHolder.setInitParameter("jersey.config.server.provider.packages", HelloWorldResource.class.getPackageName());
+        servletHolder.setInitParameter("jersey.config.server.provider.packages", SimpleResource.class.getPackageName());
 
         server.setHandler(context);
         server.start();
