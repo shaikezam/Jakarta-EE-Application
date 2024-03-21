@@ -7,11 +7,10 @@
         <class>io.shaikezam.Person</class>
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.mariadb.jdbc.Driver"/>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:mariadb://db:3306/mydb"/>
-            <property name="jakarta.persistence.jdbc.user" value="admin"/>
-            <property name="jakarta.persistence.jdbc.password" value="admin"/>
+            <property name="jakarta.persistence.jdbc.url" value=""/>
+            <property name="jakarta.persistence.jdbc.user" value=""/>
+            <property name="jakarta.persistence.jdbc.password" value=""/>
             <property name="jakarta.persistence.schema-generation.database.action" value="none"/>
-            <property name="eclipselink.jpa.uppercase-column-names" value="false"/>
         </properties>
     </persistence-unit>
 </persistence>

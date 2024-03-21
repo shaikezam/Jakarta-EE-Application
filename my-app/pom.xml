@@ -13,6 +13,7 @@
         <maven.compiler.target>21</maven.compiler.target>
         <jetty.version>11.0.20</jetty.version>
         <jakarta.servlet-api.version>6.0.0</jakarta.servlet-api.version>
+        <jakarta.transaction-api.version>2.0.1</jakarta.transaction-api.version>
         <maven-assembly-plugin.version>3.6.0</maven-assembly-plugin.version>
         <slf4j-nop.version>2.0.12</slf4j-nop.version>
         <jersey.version>3.1.5</jersey.version>
@@ -56,6 +57,11 @@
             <version>${jakarta.servlet-api.version}</version>
         </dependency>
         <dependency>
+            <groupId>jakarta.transaction</groupId>
+            <artifactId>jakarta.transaction-api</artifactId>
+            <version>${jakarta.transaction-api.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>eclipselink</artifactId>
             <version>${eclipselink.version}</version>
@@ -84,23 +90,6 @@
     </dependencies>
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.flywaydb</groupId>
-                <artifactId>flyway-maven-plugin</artifactId>
-                <version>1${flyway-maven-plugin.version}</version>
-                <configuration>
-                    <url>jdbc:mysql://db:3306/mydb</url>
-                    <user>admin</user>
-                    <password>admin</password>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.mariadb.jdbc</groupId>
-                        <artifactId>mariadb-java-client</artifactId>
-                        <version>${mariadb-java-client.version}</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>

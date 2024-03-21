@@ -4,7 +4,6 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.flywaydb.core.Flyway;
-import org.flywaydb.core.api.configuration.FluentConfiguration;
 import org.glassfish.jersey.servlet.ServletContainer;
 
 import java.util.logging.Logger;
@@ -17,11 +16,12 @@ public class WebServer {
         logger.info("Starting server...");
 
         Flyway flyway = Flyway.configure()
-                .dataSource("jdbc:mariadb://db:3306/mydb", "admin", "admin")
+                .dataSource(System.getenv("DB_URL"), System.getenv("DB_USER"), System.getenv("DB_PASS"))
                 .locations("db/migration")
                 .load();
 
         flyway.migrate();
+
         Server server = new Server(8080);
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.setContextPath("/");

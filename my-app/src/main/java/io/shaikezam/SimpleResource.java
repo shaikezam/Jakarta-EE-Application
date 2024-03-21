@@ -23,4 +23,11 @@ public class SimpleResource {
     public Response getLol() {
         return Response.ok(simpleService.test()).build();
     }
+
+    @GET
+    @Path("lol1")
+    public Response getLol1() {
+        simpleService.test1();
+        return Response.ok().build();
+    }
 }

@@ -6,6 +6,10 @@ services:
     build: my-app
     ports:
       - "8080:8080"
+    environment:
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      DB_URL: ${DB_URL}
     depends_on:
       - db
     networks:
@@ -16,9 +20,9 @@ services:
     build: db
     restart: always
     environment:
-      MARIADB_ROOT_PASSWORD: admin
-      MARIADB_USER: admin
-      MARIADB_PASSWORD: admin
+      MARIADB_ROOT_PASSWORD: ${DB_PASS}
+      MARIADB_USER: ${DB_USER}
+      MARIADB_PASSWORD: ${DB_PASS}
       MARIADB_DATABASE: application
     ports:
       - "3306:3306"
@@ -34,7 +38,7 @@ services:
     environment:
       PMA_HOST: db
       PMA_PORT: 3306
-      MARIADB_ROOT_PASSWORD: admin
+      MARIADB_ROOT_PASSWORD: ${DB_PASS}
     depends_on:
       - db
     networks:
