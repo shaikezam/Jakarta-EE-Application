@@ -23,13 +23,15 @@ public class Resource {
     public EntityManagerFactory createEntityManagerFactory() {
         logger.info("create EntityManagerFactory...");
         String persistenceUnitName = "default"; // Set your persistence unit name here
-        String jdbcUrl = System.getenv("DB_URL");
+        String dbHost = System.getenv("DB_HOST");
+        String dbPort = System.getenv("DB_PORT");
+        String dbUrl = String.format("jdbc:mariadb://%s:%s/%s", dbHost, dbPort, "order_service");
         String jdbcUser = System.getenv("DB_USER");
         String jdbcPassword = System.getenv("DB_PASS");
 
         // Set the database properties
         java.util.Properties properties = new java.util.Properties();
-        properties.setProperty("jakarta.persistence.jdbc.url", jdbcUrl);
+        properties.setProperty("jakarta.persistence.jdbc.url", dbUrl);
         properties.setProperty("jakarta.persistence.jdbc.user", jdbcUser);
         properties.setProperty("jakarta.persistence.jdbc.password", jdbcPassword);
 

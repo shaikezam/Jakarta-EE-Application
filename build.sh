@@ -2,7 +2,7 @@
 
 echo "start build..."
 
-cd my-app
+cd order-service
 mvn clean install -DskipTests -T 4
 
 docker compose up

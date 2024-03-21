@@ -4,4 +4,4 @@ RUN apk --no-cache add curl
 EXPOSE 8080
 COPY target/jakarta-app-1.0-SNAPSHOT.jar /app/app.jar
 WORKDIR /app
-ENTRYPOINT ["java","-jar","-DDB_USER=${DB_USER}","-DDB_URL=${DB_URL}","app.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]
