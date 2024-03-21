@@ -8,6 +8,7 @@ import org.eclipse.jetty.servlet.ServletHolder;
 import org.flywaydb.core.Flyway;
 import org.glassfish.jersey.servlet.ServletContainer;
 
+import javax.sql.DataSource;
 import java.util.logging.Logger;
 
 public class WebServer {

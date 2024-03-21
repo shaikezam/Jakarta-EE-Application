@@ -4,88 +4,67 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.shaikezam</groupId>
-    <artifactId>jakarta-app</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <parent>
+        <groupId>io.shaikezam</groupId>
+        <artifactId>jakarta-system-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <artifactId>order-service</artifactId>
 
-    <properties>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
-        <jetty.version>11.0.20</jetty.version>
-        <jakarta.servlet-api.version>6.0.0</jakarta.servlet-api.version>
-        <jakarta.transaction-api.version>2.0.1</jakarta.transaction-api.version>
-        <maven-assembly-plugin.version>3.6.0</maven-assembly-plugin.version>
-        <slf4j-nop.version>2.0.12</slf4j-nop.version>
-        <jersey.version>3.1.5</jersey.version>
-        <eclipselink.version>4.0.2</eclipselink.version>
-        <lombok.version>1.18.30</lombok.version>
-        <mariadb-java-client.version>3.3.3</mariadb-java-client.version>
-        <flyway.user>admin</flyway.user>
-        <flyway.password>admin</flyway.password>
-        <flyway.schemas>mydb</flyway.schemas>
-        <flyway-maven-plugin.version>0.10.0</flyway-maven-plugin.version>
-    </properties>
     <dependencies>
         <dependency>
             <groupId>org.glassfish.jersey.containers</groupId>
             <artifactId>jersey-container-servlet-core</artifactId>
-            <version>${jersey.version}</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.inject</groupId>
             <artifactId>jersey-cdi2-se</artifactId>
-            <version>${jersey.version}</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-json-jackson</artifactId>
-            <version>${jersey.version}</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-server</artifactId>
-            <version>${jetty.version}</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-servlet</artifactId>
-            <version>${jetty.version}</version>
         </dependency>
         <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
-            <version>${jakarta.servlet-api.version}</version>
         </dependency>
         <dependency>
             <groupId>jakarta.transaction</groupId>
             <artifactId>jakarta.transaction-api</artifactId>
-            <version>${jakarta.transaction-api.version}</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>eclipselink</artifactId>
-            <version>${eclipselink.version}</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>org.eclipse.persistence.jpa</artifactId>
-            <version>${eclipselink.version}</version>
         </dependency>
         <dependency>
             <groupId>org.mariadb.jdbc</groupId>
             <artifactId>mariadb-java-client</artifactId>
-            <version>${mariadb-java-client.version}</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
-            <version>7.5.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-nop</artifactId>
         </dependency>
     </dependencies>
     <build>
