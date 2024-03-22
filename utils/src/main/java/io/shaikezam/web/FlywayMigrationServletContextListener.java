@@ -1,4 +1,4 @@
-package io.shaikezam;
+package io.shaikezam.web;
 
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;

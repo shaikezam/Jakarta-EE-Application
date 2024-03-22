@@ -1,5 +1,6 @@
-package io.shaikezam;
+package io.shaikezam.persistence.entity;
 
+import io.shaikezam.persistence.entity.AbstractEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,19 +12,16 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "ORDERS")
-public class OrderEntity {
+public class OrderEntity extends AbstractEntity {
+
+    public static String TABLE_NAME = "ORDERS";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "price", nullable = false)
     private Double price;
-
-    @Column(name = "date_created", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime dateCreated;
-
-    @Column(name = "date_updated", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime dateUpdated;
 
     @Column(name = "user_id", nullable = false)
     private Long userId;

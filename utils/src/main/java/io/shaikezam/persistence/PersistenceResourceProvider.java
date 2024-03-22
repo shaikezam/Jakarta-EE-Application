@@ -1,4 +1,4 @@
-package io.shaikezam;
+package io.shaikezam.persistence;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.RequestScoped;

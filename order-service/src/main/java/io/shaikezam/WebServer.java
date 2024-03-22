@@ -1,10 +1,10 @@
 package io.shaikezam;
 
+import io.shaikezam.web.FlywayMigrationServletContextListener;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
-import org.flywaydb.core.Flyway;
 import org.glassfish.jersey.servlet.ServletContainer;
 
 import java.util.logging.Logger;
