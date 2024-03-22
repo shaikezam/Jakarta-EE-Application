@@ -38,10 +38,6 @@
             <artifactId>jakarta.servlet-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>jakarta.transaction</groupId>
-            <artifactId>jakarta.transaction-api</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>eclipselink</artifactId>
         </dependency>
@@ -59,12 +55,12 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-core</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-nop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.shaikezam</groupId>
+            <artifactId>utils</artifactId>
         </dependency>
     </dependencies>
     <build>

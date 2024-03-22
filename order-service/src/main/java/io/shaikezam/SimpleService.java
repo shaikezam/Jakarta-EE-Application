@@ -3,10 +3,7 @@ package io.shaikezam;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
-import jakarta.transaction.Transactional;
 
 import java.util.List;
 import java.util.logging.Logger;

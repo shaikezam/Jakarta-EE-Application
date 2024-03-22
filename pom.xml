@@ -13,7 +13,7 @@
         <maven.compiler.target>21</maven.compiler.target>
         <jetty.version>11.0.20</jetty.version>
         <jakarta.servlet-api.version>6.0.0</jakarta.servlet-api.version>
-        <jakarta.transaction-api.version>2.0.1</jakarta.transaction-api.version>
+        <jakarta.enterprise.cdi-api.version>4.0.1</jakarta.enterprise.cdi-api.version>
         <maven-assembly-plugin.version>3.6.0</maven-assembly-plugin.version>
         <slf4j-nop.version>2.0.12</slf4j-nop.version>
         <jersey.version>3.1.5</jersey.version>
@@ -51,14 +51,14 @@
                 <version>${jetty.version}</version>
             </dependency>
             <dependency>
+                <groupId>jakarta.enterprise</groupId>
+                <artifactId>jakarta.enterprise.cdi-api</artifactId>
+                <version>${jakarta.enterprise.cdi-api.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>jakarta.servlet</groupId>
                 <artifactId>jakarta.servlet-api</artifactId>
                 <version>${jakarta.servlet-api.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>jakarta.transaction</groupId>
-                <artifactId>jakarta.transaction-api</artifactId>
-                <version>${jakarta.transaction-api.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.persistence</groupId>
@@ -91,9 +91,15 @@
                 <artifactId>slf4j-nop</artifactId>
                 <version>${slf4j-nop.version}</version>
             </dependency>
+            <dependency>
+                <groupId>io.shaikezam</groupId>
+                <artifactId>utils</artifactId>
+                <version>${project.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <modules>
         <module>order-service</module>
+        <module>utils</module>
     </modules>
 </project>
