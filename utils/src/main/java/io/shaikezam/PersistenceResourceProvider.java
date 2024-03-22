@@ -11,11 +11,10 @@ import jakarta.persistence.Persistence;
 
 import java.util.logging.Logger;
 
-
 @ApplicationScoped
-public class Resource {
+public class PersistenceResourceProvider {
 
-    private static final Logger logger = Logger.getLogger(Resource.class.getName());
+    private static final Logger logger = Logger.getLogger(PersistenceResourceProvider.class.getName());
 
     @Produces
     @Default

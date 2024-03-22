@@ -22,6 +22,7 @@
         <mariadb-java-client.version>3.3.3</mariadb-java-client.version>
         <flyway-core.version>8.0.5</flyway-core.version>
         <slf4j-nop.version>2.0.12</slf4j-nop.version>
+        <jakarta.persistence-api.version>3.1.0</jakarta.persistence-api.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -59,6 +60,11 @@
                 <groupId>jakarta.servlet</groupId>
                 <artifactId>jakarta.servlet-api</artifactId>
                 <version>${jakarta.servlet-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>jakarta.persistence</groupId>
+                <artifactId>jakarta.persistence-api</artifactId>
+                <version>${jakarta.persistence-api.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.persistence</groupId>
