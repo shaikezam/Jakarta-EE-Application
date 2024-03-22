@@ -41,10 +41,6 @@
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>eclipselink</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.eclipse.persistence</groupId>-->
-<!--            <artifactId>org.eclipse.persistence.jpa</artifactId>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>org.mariadb.jdbc</groupId>
             <artifactId>mariadb-java-client</artifactId>

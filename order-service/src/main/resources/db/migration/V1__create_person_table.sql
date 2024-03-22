@@ -1,6 +1,0 @@
-CREATE TABLE PERSON (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL
-);
-
-INSERT INTO PERSON (name) VALUES ('Alice'), ('Bob'), ('Charlie');

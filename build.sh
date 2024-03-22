@@ -4,7 +4,4 @@ echo "start build..."
 
 mvn clean install -DskipTests -T 4
 
-#cd order-service
-#mvn clean install -DskipTests -T 4
-
 docker compose up

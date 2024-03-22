@@ -20,24 +20,24 @@ public class SimpleService implements ISimpleService {
     public String test() {
         entityManager.getTransaction().begin();
 
-        TypedQuery<Person> query = entityManager.createQuery("SELECT p FROM PERSON p", Person.class);
-        List<Person> persons = query.getResultList();
+        TypedQuery<OrderEntity> query = entityManager.createQuery("SELECT p FROM ORDERS p", OrderEntity.class);
+        List<OrderEntity> persons = query.getResultList();
         logger.info("Size: " + persons.size());
         entityManager.getTransaction().commit();
 
-        for (Person currentPerson : persons) {
+        for (OrderEntity currentPerson : persons) {
             //logger.info("Person: " + currentPerson);
         }
         return "COOL";
     }
 
-
     @Override
     public void test1() {
         entityManager.getTransaction().begin();
-        Person person = new Person();
-        person.setName("Shai");
-        entityManager.persist(person);
+        OrderEntity orderEntity = new OrderEntity();
+        orderEntity.setUserId(1L);
+        orderEntity.setPrice(300.0);
+        entityManager.persist(orderEntity);
         entityManager.getTransaction().commit();
     }
 }
