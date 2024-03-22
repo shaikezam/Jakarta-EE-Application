@@ -1,17 +1,18 @@
-package io.shaikezam;
+package io.shaikezam.controller;
 
+import io.shaikezam.service.IOrderService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.core.Response;
 
-@Path("/hello")
+@Path("/orders")
 @ApplicationScoped
-public class SimpleResource {
+public class OrderResource {
 
     @Inject
-    private ISimpleService simpleService;
+    private IOrderService simpleService;
 
     @GET
     public Response getMessage() {
