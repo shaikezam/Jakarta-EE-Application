@@ -14,7 +14,6 @@ public abstract class AbstractDao<T> {
     private String tableName;
     private Class<T> clazz;
 
-    @Inject
     public AbstractDao(String tableName, Class<T> clazz) {
         this.tableName = tableName;
         this.clazz = clazz;
