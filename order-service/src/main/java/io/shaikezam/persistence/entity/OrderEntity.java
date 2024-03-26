@@ -2,13 +2,14 @@ package io.shaikezam.persistence.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @NoArgsConstructor
-@AllArgsConstructor()
+@AllArgsConstructor
 @Entity(name = "ORDERS")
 public class OrderEntity extends AbstractEntity {
 
@@ -19,4 +20,5 @@ public class OrderEntity extends AbstractEntity {
 
     @Column(name = "user_id", nullable = false)
     private Long userId;
+
 }

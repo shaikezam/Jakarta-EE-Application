@@ -1,6 +1,5 @@
 package io.shaikezam.persistence.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import io.shaikezam.persistence.converter.TimestampToLocalDateTimeAttributeConverter;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -21,11 +20,9 @@ public abstract class AbstractEntity {
 
     @Convert(converter = TimestampToLocalDateTimeAttributeConverter.class)
     @Column(name = "date_created", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dateCreated;
 
     @Convert(converter = TimestampToLocalDateTimeAttributeConverter.class)
     @Column(name = "date_updated", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dateUpdated;
 }

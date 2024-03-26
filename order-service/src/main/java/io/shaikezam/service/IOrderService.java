@@ -1,9 +1,9 @@
 package io.shaikezam.service;
 
-import io.shaikezam.persistence.entity.OrderEntity;
+import io.shaikezam.model.OrderDTO;
 
 import java.util.List;
 
 public interface IOrderService {
-    List<OrderEntity> getAllOrders();
+    List<OrderDTO> getAllOrders();
 }
