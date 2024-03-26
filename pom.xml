@@ -23,6 +23,8 @@
         <flyway-core.version>8.0.5</flyway-core.version>
         <slf4j-nop.version>2.0.12</slf4j-nop.version>
         <jakarta.persistence-api.version>3.1.0</jakarta.persistence-api.version>
+        <jackson.version>2.17.0</jackson.version>
+        <jakarta.ws.rs-api.version>3.1.0</jakarta.ws.rs-api.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -42,6 +44,16 @@
                 <version>${jersey.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-jsr310</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-server</artifactId>
                 <version>${jetty.version}</version>
@@ -55,6 +67,11 @@
                 <groupId>jakarta.enterprise</groupId>
                 <artifactId>jakarta.enterprise.cdi-api</artifactId>
                 <version>${jakarta.enterprise.cdi-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>jakarta.ws.rs</groupId>
+                <artifactId>jakarta.ws.rs-api</artifactId>
+                <version>${jakarta.ws.rs-api.version}</version>
             </dependency>
             <dependency>
                 <groupId>jakarta.servlet</groupId>

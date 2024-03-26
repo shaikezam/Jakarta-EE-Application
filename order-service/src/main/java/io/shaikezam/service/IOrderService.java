@@ -1,7 +1,9 @@
 package io.shaikezam.service;
 
-public interface IOrderService {
-    String test();
+import io.shaikezam.persistence.entity.OrderEntity;
 
-    void test1();
+import java.util.List;
+
+public interface IOrderService {
+    List<OrderEntity> getAllOrders();
 }

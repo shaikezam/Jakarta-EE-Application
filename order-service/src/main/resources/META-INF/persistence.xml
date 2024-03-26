@@ -5,6 +5,7 @@
              version="3.0">
     <persistence-unit name="default" transaction-type="RESOURCE_LOCAL">
         <class>io.shaikezam.persistence.entity.OrderEntity</class>
+        <class>io.shaikezam.persistence.converter.TimestampToLocalDateTimeAttributeConverter</class>
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.mariadb.jdbc.Driver"/>
             <property name="jakarta.persistence.jdbc.url" value=""/>

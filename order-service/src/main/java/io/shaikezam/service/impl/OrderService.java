@@ -18,21 +18,7 @@ public class OrderService implements IOrderService {
     private static final Logger logger = Logger.getLogger(OrderService.class.getName());
 
     @Override
-    public String test() {
-        List<OrderEntity> persons = orderEntityDao.findAll();
-        logger.info("Size: " + persons.size());
-
-        for (OrderEntity currentPerson : persons) {
-            //logger.info("Person: " + currentPerson);
-        }
-        return "COOL";
-    }
-
-    @Override
-    public void test1() {
-        OrderEntity orderEntity = new OrderEntity();
-        orderEntity.setUserId(1L);
-        orderEntity.setPrice(300.0);
-        orderEntityDao.create(orderEntity);
+    public List<OrderEntity> getAllOrders() {
+        return orderEntityDao.findAll();
     }
 }

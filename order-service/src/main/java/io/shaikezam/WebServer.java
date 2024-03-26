@@ -1,12 +1,13 @@
 package io.shaikezam;
 
-import io.shaikezam.controller.OrderResource;
-import io.shaikezam.web.FlywayMigrationServletContextListener;
+import io.shaikezam.config.ApplicationConfig;
+import io.shaikezam.web.listener.FlywayMigrationServletContextListener;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.glassfish.jersey.servlet.ServletContainer;
+import org.glassfish.jersey.servlet.ServletProperties;
 
 import java.util.logging.Logger;
 
@@ -24,7 +25,7 @@ public class WebServer {
         context.setContextPath("/");
         ServletHolder servletHolder = context.addServlet(ServletContainer.class, "/web/api/*");
         servletHolder.setInitOrder(1);
-        servletHolder.setInitParameter("jersey.config.server.provider.packages", OrderResource.class.getPackageName());
+        servletHolder.setInitParameter(ServletProperties.JAXRS_APPLICATION_CLASS, ApplicationConfig.class.getName());
 
         server.setHandler(context);
         server.start();

@@ -5,30 +5,26 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
+import java.util.logging.Logger;
+
 @Path("/orders")
+@Produces(MediaType.APPLICATION_JSON)
 @ApplicationScoped
 public class OrderResource {
 
+    private static final Logger logger = Logger.getLogger(OrderResource.class.getName());
+
     @Inject
-    private IOrderService simpleService;
+    private IOrderService orderService;
 
     @GET
-    public Response getMessage() {
-        return Response.ok("Hello, World!").build();
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllOrders() {
+        return Response.ok(orderService.getAllOrders()).build();
     }
 
-    @GET
-    @Path("lol")
-    public Response getLol() {
-        return Response.ok(simpleService.test()).build();
-    }
-
-    @GET
-    @Path("lol1")
-    public Response getLol1() {
-        simpleService.test1();
-        return Response.ok().build();
-    }
 }

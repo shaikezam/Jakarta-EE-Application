@@ -1,4 +1,4 @@
-package io.shaikezam.web;
+package io.shaikezam.web.listener;
 
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
@@ -9,10 +9,6 @@ public class FlywayMigrationServletContextListener implements ServletContextList
     String dbHost = System.getenv("DB_HOST");
     String dbPort = System.getenv("DB_PORT");
     String dbUrl = String.format("jdbc:mariadb://%s:%s/%s", dbHost, dbPort, "order_service");
-    Flyway flyway = Flyway.configure()
-            .dataSource(dbUrl, System.getenv("DB_USER"), System.getenv("DB_PASS"))
-            .locations("db/migration")
-            .load();
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {

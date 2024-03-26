@@ -4,10 +4,12 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @ApplicationScoped
+@NoArgsConstructor
 public abstract class AbstractDao<T> {
 
     private EntityManager entityManager;
@@ -30,6 +32,7 @@ public abstract class AbstractDao<T> {
             transaction.begin();
             entityManager.persist(entity);
             transaction.commit();
+            entityManager.refresh(entity);
             return entity;
         } catch (Exception e) {
             if (transaction.isActive()) {
@@ -45,6 +48,7 @@ public abstract class AbstractDao<T> {
             transaction.begin();
             T mergedEntity = entityManager.merge(entity);
             transaction.commit();
+            entityManager.refresh(entity);
             return mergedEntity;
         } catch (Exception e) {
             if (transaction.isActive()) {
@@ -60,6 +64,7 @@ public abstract class AbstractDao<T> {
             transaction.begin();
             entityManager.remove(entity);
             transaction.commit();
+            entityManager.refresh(entity);
         } catch (Exception e) {
             if (transaction.isActive()) {
                 transaction.rollback();
