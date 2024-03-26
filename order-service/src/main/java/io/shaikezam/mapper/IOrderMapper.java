@@ -13,21 +13,11 @@ import java.util.stream.Collectors;
 @Mapper(componentModel = MappingConstants.ComponentModel.CDI, injectionStrategy = InjectionStrategy.CONSTRUCTOR)
 public interface IOrderMapper {
 
-    IOrderMapper INSTANCE = Mappers.getMapper(IOrderMapper.class);
+    OrderDTO orderEntityToOrderDTO(OrderEntity orderEntity);
 
-    OrderDTO entityToDTO(OrderEntity entity);
+    OrderEntity orderDTOToOrderEntity(OrderDTO orderDTO);
 
-    OrderEntity DTOToEntity(OrderDTO dto);
+    List<OrderDTO> entitiesToDTOS(List<OrderEntity> entities);
 
-    default List<OrderDTO> entitiesToDTOS(List<OrderEntity> entities) {
-        return entities.stream()
-                .map(this::entityToDTO)
-                .collect(Collectors.toList());
-    }
-
-    default List<OrderEntity> DTOSToEntities(List<OrderDTO> dtos) {
-        return dtos.stream()
-                .map(this::DTOToEntity)
-                .collect(Collectors.toList());
-    }
+    List<OrderEntity> DTOSToEntities(List<OrderDTO> dtos);
 }
