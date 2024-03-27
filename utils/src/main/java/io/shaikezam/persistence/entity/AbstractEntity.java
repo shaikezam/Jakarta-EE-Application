@@ -25,4 +25,14 @@ public abstract class AbstractEntity {
     @Convert(converter = TimestampToLocalDateTimeAttributeConverter.class)
     @Column(name = "date_updated", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime dateUpdated;
+
+    @PrePersist
+    protected void onCreate() {
+        this.dateUpdated = this.dateCreated = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.dateUpdated = LocalDateTime.now();
+    }
 }

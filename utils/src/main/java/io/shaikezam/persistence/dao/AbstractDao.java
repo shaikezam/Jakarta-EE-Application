@@ -64,7 +64,6 @@ public abstract class AbstractDao<T> {
             transaction.begin();
             entityManager.remove(entity);
             transaction.commit();
-            entityManager.refresh(entity);
         } catch (Exception e) {
             if (transaction.isActive()) {
                 transaction.rollback();
