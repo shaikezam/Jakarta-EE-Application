@@ -4,10 +4,12 @@ import io.shaikezam.model.ProductDTO;
 import io.shaikezam.service.IProductService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.jms.*;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import lombok.RequiredArgsConstructor;
+import org.apache.activemq.ActiveMQConnectionFactory;
 
 import java.util.logging.Logger;
 
@@ -19,11 +21,33 @@ import java.util.logging.Logger;
 public class ProductResource {
 
     private static final Logger logger = Logger.getLogger(ProductResource.class.getName());
+    private static final String BROKER_URL = "tcp://messaging:61616";
+    private static final String TOPIC_NAME = "TEST.FOO";
+
 
     private final IProductService productService;
 
     @GET
-    public Response getAllProducts() {
+    public Response getAllProducts() throws Exception {
+        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(BROKER_URL);
+
+        // Create a connection
+        Connection connection = connectionFactory.createConnection("admin", "admin");
+        connection.start();
+
+        // Create a session
+        Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+
+        // Create a destination (topic or queue)
+        Destination destination = session.createQueue(TOPIC_NAME);
+
+        // Create a consumer
+        MessageConsumer consumer = session.createConsumer(destination);
+        Message message = consumer.receive(1000);
+
+        System.out.println(message);
+        session.close();
+        connection.close();
         return Response.ok(productService.getAllProducts()).build();
     }
 

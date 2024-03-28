@@ -4,8 +4,6 @@ services:
     restart: always
     container_name: order-service
     build: order-service
-#    ports:
-#      - "8081:8080"
     environment:
       DB_USER: ${DB_USER}
       DB_PASS: ${DB_PASS}
@@ -21,8 +19,6 @@ services:
     restart: always
     container_name: product-service
     build: product-service
-#    ports:
-#      - "8082:8080"
     environment:
       DB_USER: ${DB_USER}
       DB_PASS: ${DB_PASS}
@@ -31,6 +27,27 @@ services:
       DB_NAME: ${PRODUCT_SERVICE_DBNAME}
     depends_on:
       - db
+    networks:
+      - app-network
+
+  messaging:
+    container_name: messaging
+    build: messaging
+    restart: always
+    environment:
+      ACTIVEMQ_WEB_USER: admin
+      ACTIVEMQ_WEB_PASSWORD: admin
+      ACTIVEMQ_CONNECTION_USER: admin
+      ACTIVEMQ_CONNECTION_PASSWORD: admin
+      ACTIVEMQ_JMX_USER: admin
+      ACTIVEMQ_JMX_PASSWORD: admin
+      ACTIVEMQ_OPTS: -Djetty.host=0.0.0.0 -Djava.util.logging.config.file=logging.properties -Djava.security.auth.login.config=/opt/apache-activemq/conf/login.config
+    ports:
+      - "8161:8161"
+      - "1099:1099"
+      - "61616:61616"
+      - "5672:5672"
+      - "61613:61613"
     networks:
       - app-network
 
