@@ -9,15 +9,18 @@ import lombok.*;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = OrderEntity.TABLE_NAME)
-public class OrderEntity extends AbstractEntity {
+@Entity(name = ProductEntity.TABLE_NAME)
+public class ProductEntity extends AbstractEntity {
 
-    public final static String TABLE_NAME = "ORDERS";
+    public final static String TABLE_NAME = "PRODUCTS";
 
     @Column(name = "price", nullable = false)
     private Double price;
 
-    @Column(name = "user_id", nullable = false)
-    private Long userId;
+    @Column(name = "description", nullable = false)
+    private String description;
+
+    @Column(name = "name", nullable = false)
+    private String text;
 
 }

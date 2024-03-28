@@ -135,6 +135,7 @@
         </dependencies>
     </dependencyManagement>
     <modules>
+        <module>product-service</module>
         <module>order-service</module>
         <module>utils</module>
     </modules>

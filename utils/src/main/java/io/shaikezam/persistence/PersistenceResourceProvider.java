@@ -24,7 +24,8 @@ public class PersistenceResourceProvider {
         String persistenceUnitName = "default"; // Set your persistence unit name here
         String dbHost = System.getenv("DB_HOST");
         String dbPort = System.getenv("DB_PORT");
-        String dbUrl = String.format("jdbc:mariadb://%s:%s/%s", dbHost, dbPort, "order_service");
+        String dbName = System.getenv("DB_NAME");
+        String dbUrl = String.format("jdbc:mariadb://%s:%s/%s", dbHost, dbPort, dbName);
         String jdbcUser = System.getenv("DB_USER");
         String jdbcPassword = System.getenv("DB_PASS");
 
