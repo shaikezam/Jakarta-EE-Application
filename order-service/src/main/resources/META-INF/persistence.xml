@@ -5,6 +5,7 @@
              version="3.0">
     <persistence-unit name="default" transaction-type="RESOURCE_LOCAL">
         <class>io.shaikezam.persistence.entity.OrderEntity</class>
+        <class>io.shaikezam.persistence.entity.OrderProductsEntity</class>
         <class>io.shaikezam.persistence.converter.TimestampToLocalDateTimeAttributeConverter</class>
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.mariadb.jdbc.Driver"/>
@@ -12,6 +13,10 @@
             <property name="jakarta.persistence.jdbc.user" value=""/>
             <property name="jakarta.persistence.jdbc.password" value=""/>
             <property name="jakarta.persistence.schema-generation.database.action" value="none"/>
+            <property name="eclipselink.weaving" value="static" />
+            <property name="eclipselink.logging.level.sql" value="FINEST" />
+            <property name="eclipselink.logging.level" value="FINEST" />
+            <property name="eclipselink.logging.level.cache" value="FINEST" />
         </properties>
     </persistence-unit>
 </persistence>

@@ -11,6 +11,7 @@ services:
       DB_PORT: ${DB_PORT}
       DB_NAME: ${ORDER_SERVICE_DBNAME}
     depends_on:
+      - nginx
       - db
     networks:
       - app-network

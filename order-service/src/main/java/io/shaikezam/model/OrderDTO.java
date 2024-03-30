@@ -1,6 +1,10 @@
 package io.shaikezam.model;
 
+import io.shaikezam.persistence.entity.OrderProductsEntity;
 import lombok.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -10,4 +14,5 @@ import lombok.*;
 public class OrderDTO extends AbstractDTO {
     private Double price;
     private Long userId;
+    private Set<OrderProductsDTO> orderProducts = new HashSet<>();
 }

@@ -1,8 +1,10 @@
 package io.shaikezam.persistence.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -16,8 +18,10 @@ public class OrderEntity extends AbstractEntity {
 
     @Column(name = "price", nullable = false)
     private Double price;
-
     @Column(name = "user_id", nullable = false)
     private Long userId;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "order_id")
+    private List<OrderProductsEntity> orderProducts = new ArrayList<>();
 
 }

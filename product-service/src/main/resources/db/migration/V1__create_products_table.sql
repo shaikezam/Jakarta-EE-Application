@@ -7,8 +7,8 @@ CREATE TABLE IF NOT EXISTS PRODUCTS (
   description TEXT
 );
 
-INSERT INTO PRODUCTS (name, price, description) VALUES ('Smartphone', 799.99, 'A high-end smartphone with advanced features.');
-INSERT INTO PRODUCTS (name, price, description) VALUES ('Laptop', 1299.99, 'A powerful laptop for professional use.');
-INSERT INTO PRODUCTS (name, price, description) VALUES ('Headphones', 199.99, 'Wireless headphones with noise-cancelling technology.');
-INSERT INTO PRODUCTS (name, price, description) VALUES ('Smart Watch', 349.99, 'A smartwatch with fitness tracking and notifications.');
-INSERT INTO PRODUCTS (name, price, description) VALUES ('Tablet', 499.99, 'A versatile tablet for work and entertainment.');
+INSERT INTO PRODUCTS (name, price, description) VALUES ('Smartphone', 700.00, 'A high-end smartphone with advanced features.');
+INSERT INTO PRODUCTS (name, price, description) VALUES ('Laptop', 1300.00, 'A powerful laptop for professional use.');
+INSERT INTO PRODUCTS (name, price, description) VALUES ('Headphones', 200.00, 'Wireless headphones with noise-cancelling technology.');
+INSERT INTO PRODUCTS (name, price, description) VALUES ('Smart Watch', 350.00, 'A smartwatch with fitness tracking and notifications.');
+INSERT INTO PRODUCTS (name, price, description) VALUES ('Tablet', 500.9009, 'A versatile tablet for work and entertainment.');
