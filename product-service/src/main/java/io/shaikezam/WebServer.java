@@ -3,7 +3,7 @@ package io.shaikezam;
 import io.shaikezam.config.ApplicationConfig;
 import io.shaikezam.messaging.QueueConstants;
 import io.shaikezam.web.listener.FlywayMigrationServletContextListener;
-import io.shaikezam.web.listener.messageing.JMSListenerServletContextListener;
+import io.shaikezam.web.listener.messaging.JMSListenerServletContextListener;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;

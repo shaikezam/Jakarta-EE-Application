@@ -1,4 +1,4 @@
-package io.shaikezam.web.listener.messageing;
+package io.shaikezam.web.listener.messaging;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.jms.*;
