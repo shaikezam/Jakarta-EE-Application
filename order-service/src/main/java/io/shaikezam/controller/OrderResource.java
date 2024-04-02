@@ -1,5 +1,6 @@
 package io.shaikezam.controller;
 
+import io.shaikezam.messaging.QueueConstants;
 import io.shaikezam.model.OrderDTO;
 import io.shaikezam.service.IOrderService;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -19,9 +20,6 @@ import java.util.logging.Logger;
 public class OrderResource {
 
     private static final Logger logger = Logger.getLogger(OrderResource.class.getName());
-    private static final String BROKER_URL = "tcp://messaging:61616";
-    private static final String QUEUE_NAME = "TEST.FOO";
-
 
     private final IOrderService orderService;
     private final io.shaikezam.messaging.MessageProducer messageProducer;
@@ -40,7 +38,7 @@ public class OrderResource {
     @GET
     @Path("/{orderId}")
     public Response getOrder(@PathParam("orderId") long orderId) {
-        messageProducer.sendMessage(BROKER_URL, QUEUE_NAME, "BLABLA!");
+        messageProducer.sendMessage(QueueConstants.BROKER_URL, QueueConstants.ORDER_COMPLETED_QUEUE_NAME, "BLABLA!");
         return orderService.getOrder(orderId)
                 .map(order -> Response.ok(order).build())
                 .orElse(Response.status(Response.Status.NOT_FOUND).entity("Order not found").build());

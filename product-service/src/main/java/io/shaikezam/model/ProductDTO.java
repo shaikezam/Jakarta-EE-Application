@@ -11,4 +11,6 @@ public class ProductDTO extends AbstractDTO {
     private Double price;
     private String description;
     private String text;
+    private int quantityAvailable;
+    private boolean isAvailable;
 }

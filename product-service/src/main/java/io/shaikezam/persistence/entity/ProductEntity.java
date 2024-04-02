@@ -13,14 +13,15 @@ import lombok.*;
 public class ProductEntity extends AbstractEntity {
 
     public final static String TABLE_NAME = "PRODUCTS";
-
     @Column(name = "price", nullable = false)
     private Double price;
-
     @Column(name = "description", nullable = false)
     private String description;
-
     @Column(name = "name", nullable = false)
     private String text;
+    @Column(name = "quantity_available", nullable = false)
+    private int quantityAvailable;
+    @Column(name = "is_available", nullable = false)
+    private boolean isAvailable;
 
 }

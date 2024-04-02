@@ -1,8 +1,9 @@
 package io.shaikezam;
 
 import io.shaikezam.config.ApplicationConfig;
-import io.shaikezam.messaging.MyListener;
+import io.shaikezam.messaging.QueueConstants;
 import io.shaikezam.web.listener.FlywayMigrationServletContextListener;
+import io.shaikezam.web.listener.messageing.JMSListenerServletContextListener;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
@@ -23,6 +24,7 @@ public class WebServer {
         Server server = new Server(8080);
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.addEventListener(new FlywayMigrationServletContextListener());
+        context.addEventListener(new JMSListenerServletContextListener(QueueConstants.BROKER_URL, QueueConstants.ORDER_COMPLETED_QUEUE_NAME));
         context.setContextPath("/");
         ServletHolder servletHolder = context.addServlet(ServletContainer.class, "/web/api/*");
         servletHolder.setInitOrder(1);
@@ -30,7 +32,6 @@ public class WebServer {
 
         server.setHandler(context);
         server.start();
-        new MyListener().listen();
         server.join();
     }
 }

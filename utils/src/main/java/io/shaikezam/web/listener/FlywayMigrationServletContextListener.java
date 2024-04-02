@@ -6,10 +6,10 @@ import org.flywaydb.core.Flyway;
 
 public class FlywayMigrationServletContextListener implements ServletContextListener {
 
-    String dbHost = System.getenv("DB_HOST");
-    String dbPort = System.getenv("DB_PORT");
-    String dbName = System.getenv("DB_NAME");
-    String dbUrl = String.format("jdbc:mariadb://%s:%s/%s", dbHost, dbPort, dbName);
+    private String dbHost = System.getenv("DB_HOST");
+    private String dbPort = System.getenv("DB_PORT");
+    private String dbName = System.getenv("DB_NAME");
+    private String dbUrl = String.format("jdbc:mariadb://%s:%s/%s", dbHost, dbPort, dbName);
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
