@@ -11,7 +11,6 @@ services:
       DB_PORT: ${DB_PORT}
       DB_NAME: ${ORDER_SERVICE_DBNAME}
     depends_on:
-      - nginx
       - db
     networks:
       - app-network
@@ -36,18 +35,14 @@ services:
     build: messaging
     restart: always
     environment:
-      ACTIVEMQ_WEB_USER: admin
-      ACTIVEMQ_WEB_PASSWORD: admin
+#      ACTIVEMQ_WEB_USER: admin
+#      ACTIVEMQ_WEB_PASSWORD: admin
       ACTIVEMQ_CONNECTION_USER: admin
       ACTIVEMQ_CONNECTION_PASSWORD: admin
-      ACTIVEMQ_JMX_USER: admin
-      ACTIVEMQ_JMX_PASSWORD: admin
+#      ACTIVEMQ_JMX_USER: admin
+#      ACTIVEMQ_JMX_PASSWORD: admin
     ports:
-      - "8161:8161"
-      - "1099:1099"
       - "61616:61616"
-      - "5672:5672"
-      - "61613:61613"
     networks:
       - app-network
 
@@ -58,6 +53,8 @@ services:
     ports:
       - "8080:8080"
     depends_on:
+      - product-service
+      - order-service
       - db
     networks:
       - app-network

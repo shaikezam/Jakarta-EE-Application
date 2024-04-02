@@ -13,10 +13,6 @@
             <property name="jakarta.persistence.jdbc.user" value=""/>
             <property name="jakarta.persistence.jdbc.password" value=""/>
             <property name="jakarta.persistence.schema-generation.database.action" value="none"/>
-            <property name="eclipselink.weaving" value="static" />
-            <property name="eclipselink.logging.level.sql" value="FINEST" />
-            <property name="eclipselink.logging.level" value="FINEST" />
-            <property name="eclipselink.logging.level.cache" value="FINEST" />
         </properties>
     </persistence-unit>
 </persistence>

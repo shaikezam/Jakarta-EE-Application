@@ -1,6 +1,7 @@
 package io.shaikezam;
 
 import io.shaikezam.config.ApplicationConfig;
+import io.shaikezam.messaging.MyListener;
 import io.shaikezam.web.listener.FlywayMigrationServletContextListener;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.eclipse.jetty.server.Server;
@@ -29,6 +30,7 @@ public class WebServer {
 
         server.setHandler(context);
         server.start();
+        new MyListener().listen();
         server.join();
     }
 }
