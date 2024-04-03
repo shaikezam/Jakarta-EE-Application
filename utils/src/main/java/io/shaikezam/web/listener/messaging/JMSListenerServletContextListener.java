@@ -1,10 +1,12 @@
 package io.shaikezam.web.listener.messaging;
 
+import io.shaikezam.model.DummyDTO;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.jms.*;
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import lombok.RequiredArgsConstructor;
+import org.apache.activemq.ActiveMQConnectionFactory;
 
 @RequiredArgsConstructor
 @ApplicationScoped
@@ -18,7 +20,8 @@ public class JMSListenerServletContextListener implements ServletContextListener
     @Override
     public void onMessage(Message message) {
         try {
-            System.out.println(((TextMessage) message).getText());
+            DummyDTO messageDTO = message.getBody(DummyDTO.class);
+            System.out.println(messageDTO);
         } catch (JMSException e) {
             throw new RuntimeException(e);
         }
@@ -28,6 +31,7 @@ public class JMSListenerServletContextListener implements ServletContextListener
     public void contextInitialized(ServletContextEvent sce) {
         new Thread(() -> {
             ConnectionFactory connectionFactory = new org.apache.activemq.ActiveMQConnectionFactory(this.brokerUrl);
+            ((ActiveMQConnectionFactory) connectionFactory).setTrustAllPackages(true);
             try (JMSContext context = connectionFactory.createContext(this.activeMqUser, this.activeMqPassword, JMSContext.AUTO_ACKNOWLEDGE)) {
                 JMSConsumer consumer = context.createConsumer(context.createQueue(this.destination));
                 consumer.setMessageListener(this);

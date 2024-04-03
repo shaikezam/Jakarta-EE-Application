@@ -1,6 +1,7 @@
 package io.shaikezam.controller;
 
 import io.shaikezam.messaging.QueueConstants;
+import io.shaikezam.model.DummyDTO;
 import io.shaikezam.model.OrderDTO;
 import io.shaikezam.service.IOrderService;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -38,7 +39,7 @@ public class OrderResource {
     @GET
     @Path("/{orderId}")
     public Response getOrder(@PathParam("orderId") long orderId) {
-        messageProducer.sendMessage(QueueConstants.BROKER_URL, QueueConstants.ORDER_COMPLETED_QUEUE_NAME, "BLABLA!");
+        messageProducer.sendMessage(QueueConstants.BROKER_URL, QueueConstants.ORDER_COMPLETED_QUEUE_NAME, new DummyDTO(Thread.currentThread().getName(), "HELLO"));
         return orderService.getOrder(orderId)
                 .map(order -> Response.ok(order).build())
                 .orElse(Response.status(Response.Status.NOT_FOUND).entity("Order not found").build());
