@@ -1,5 +1,17 @@
 version: "3.9"
 services:
+
+  ui-service:
+    restart: always
+    container_name: ui-service
+    build: ui-service
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    networks:
+      - app-network
+
   order-service:
     restart: always
     container_name: order-service
