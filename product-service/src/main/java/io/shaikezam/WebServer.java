@@ -30,7 +30,7 @@ public class WebServer {
         servletHolder.setInitOrder(1);
         servletHolder.setInitParameter(ServletProperties.JAXRS_APPLICATION_CLASS, ApplicationConfig.class.getName());
         servletHolder.setInitParameter("cacheControl","max-age=0,public");
-        
+
         server.setHandler(context);
         server.start();
         server.join();

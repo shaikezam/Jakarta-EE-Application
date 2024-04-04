@@ -5,10 +5,6 @@ services:
     restart: always
     container_name: ui-service
     build: ui-service
-    ports:
-      - "3000:3000"
-    depends_on:
-      - db
     networks:
       - app-network
 
@@ -25,7 +21,7 @@ services:
       ACTIVE_MQ_USER: ${ACTIVE_MQ_USER}
       ACTIVE_MQ_PASSWORD: ${ACTIVE_MQ_PASSWORD}
     depends_on:
-      - db
+      - db-service
     networks:
       - app-network
 
@@ -42,42 +38,38 @@ services:
       ACTIVE_MQ_USER: ${ACTIVE_MQ_USER}
       ACTIVE_MQ_PASSWORD: ${ACTIVE_MQ_PASSWORD}
     depends_on:
-      - db
+      - db-service
     networks:
       - app-network
 
-  messaging:
-    container_name: messaging
-    build: messaging
+  messaging-service:
+    container_name: messaging-service
+    build: messaging-service
     restart: always
     environment:
       ACTIVEMQ_CONNECTION_USER: admin
       ACTIVEMQ_CONNECTION_PASSWORD: admin
-    ports:
-      - "61616:61616"
     networks:
       - app-network
 
-  nginx:
+  nginx-service:
     restart: always
-    container_name: nginx
-    build: nginx
+    container_name: nginx-service
+    build: nginx-service
     ports:
       - "8080:8080"
     networks:
       - app-network
 
-  db:
-    container_name: db
-    build: db
+  db-service:
+    container_name: db-service
+    build: db-service
     restart: always
     environment:
       MARIADB_ROOT_PASSWORD: ${DB_PASS}
       MARIADB_USER: ${DB_USER}
       MARIADB_PASSWORD: ${DB_PASS}
       MARIADB_DATABASE: application
-    ports:
-      - "3306:3306"
     networks:
       - app-network
 
@@ -92,7 +84,7 @@ services:
       PMA_PORT: 3306
       MARIADB_ROOT_PASSWORD: ${DB_PASS}
     depends_on:
-      - db
+      - db-service
     networks:
       - app-network
 
