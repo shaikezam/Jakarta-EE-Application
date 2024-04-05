@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Div Form</title>
+    <link href="../scripts/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../scripts/alpinejs/dist/cdn.min.js" defer></script>
+</head>
+<body>
+<div class="container mt-5" x-data="app">
+    <a href="/" class="btn btn-primary mb-3">Back to Home</a>
+    <h2>Orders</h2>
+    <hr/>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Date Created</th>
+            <th>Date Updated</th>
+            <th>Price</th>
+            <th>User ID</th>
+            <th>Order Products</th>
+        </tr>
+        </thead>
+        <tbody>
+        <template x-for="(order, i) in filteredOrders" :key="order.id">
+            <tr>
+                <td x-text="order.id"></td>
+                <td x-text="order.dateCreated"></td>
+                <td x-text="order.dateUpdated"></td>
+                <td x-text="order.price"></td>
+                <td x-text="order.userId"></td>
+                <td>
+                    <ul>
+                        <template x-for="(orderProduct, j) in order.orderProducts" :key="j">
+                            <li>
+                                Product ID: <span x-text="orderProduct.productId"></span>, Quantity: <span x-text="orderProduct.quantity"></span>
+                            </li>
+                        </template>
+                    </ul>
+                </td>
+            </tr>
+        </template>
+        </tbody>
+    </table>
+</div>
+</body>
+<script src="orders.js"></script>
+</html>
