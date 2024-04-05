@@ -1,137 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <title>Div Form</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Management System</title>
     <link href="../scripts/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="../scripts/alpinejs/dist/cdn.min.js" defer></script>
 </head>
 <body>
 
-<div class="container mt-5" x-data="app">
-    <div class="mb-3">
-        <label for="search" class="form-label">Search</label>
-        <input type="text" id="search" name="search" class="form-control" x-model="search" @input="searchData" placeholder="Search">
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="jumbotron text-center">
+                <h1 class="display-4">Order Management System</h1>
+                <p class="lead">Welcome to the Order Management System. Please select an option below:</p>
+                <hr class="my-4">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <a class="btn btn-primary btn-lg btn-block" href="create_order" role="button">Create an Order</a>
+                    </div>
+                    <div class="col-md-6">
+                        <a class="btn btn-secondary btn-lg btn-block" href="orders" role="button">My Orders</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="mb-3">
-        <label for="name" class="form-label">Name</label>
-        <input type="text" id="name" name="name" class="form-control" minlength="1" placeholder="Name" x-ref="name" />
-    </div>
-
-    <div class="mb-3">
-        <label for="description" class="form-label">Description</label>
-        <input type="text" id="description" name="description" class="form-control" minlength="1" placeholder="Description" x-ref="description" />
-    </div>
-
-    <div class="mb-3">
-        <button type="submit" x-on:click="pushData" class="btn btn-primary">Add</button>
-    </div>
-
-    <hr/>
-
-    <table class="table">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Description</th>
-        </tr>
-        </thead>
-        <tbody>
-        <template x-for="(d, i) in data" :key="i">
-            <tr>
-                <td x-text="((currentPage - 1) * pageSize) + i + 1"></td>
-                <td x-text="d.name"></td>
-                <td x-text="d.description"></td>
-            </tr>
-        </template>
-        </tbody>
-    </table>
-
-    <nav aria-label="Page navigation">
-        <ul class="pagination">
-            <li class="page-item" x-bind:class="{ disabled: currentPage === 1 }">
-                <button class="page-link" x-on:click="setCurrentPage(currentPage - 1)" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </button>
-            </li>
-            <template x-for="page in pageCount" :key="page">
-                <li class="page-item" x-bind:class="{ active: currentPage === page }">
-                    <button class="page-link" x-on:click="setCurrentPage(page)" x-text="page"></button>
-                </li>
-            </template>
-            <li class="page-item" x-bind:class="{ disabled: currentPage === pageCount }">
-                <button class="page-link" x-on:click="setCurrentPage(currentPage + 1)" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </button>
-            </li>
-        </ul>
-    </nav>
 </div>
+
 </body>
-<script>
-    document.addEventListener('alpine:init', () => {
-        Alpine.data('app', () => ({
-            content: [
-                { name: 'Test 1', description: 'Test Description 1' },
-                { name: 'Test 2', description: 'Test Description 2' },
-                { name: 'Test 3', description: 'Test Description 3' },
-                { name: 'Test 4', description: 'Test Description 4' },
-                { name: 'Test 5', description: 'Test Description 5' },
-                { name: 'Test 6', description: 'Test Description 6' },
-                { name: 'Test 7', description: 'Test Description 7' },
-                { name: 'Test 8', description: 'Test Description 8' },
-                { name: 'Test 9', description: 'Test Description 9' },
-                { name: 'Test 10', description: 'Test Description 10' },
-                { name: 'Test 11', description: 'Test Description 11' },
-                { name: 'Test 12', description: 'Test Description 12' },
-                { name: 'Test 13', description: 'Test Description 13' },
-                { name: 'Test 14', description: 'Test Description 14' },
-                { name: 'Test 15', description: 'Test Description 15' },
-                { name: 'Test 16', description: 'Test Description 16' },
-                { name: 'Test 17', description: 'Test Description 17' },
-                { name: 'Test 18', description: 'Test Description 18' },
-                { name: 'Test 19', description: 'Test Description 19' },
-                { name: 'Test 20', description: 'Test Description 20' },
-                { name: 'Test 21', description: 'Test Description 21' },
-                { name: 'Test 22', description: 'Test Description 22' },
-                { name: 'Test 23', description: 'Test Description 23' },
-                { name: 'Test 24', description: 'Test Description 24' },
-                { name: 'Test 25', description: 'Test Description 25' },
-            ],
-            currentPage: 1,
-            pageSize: 5,
-            //pageCount: Math.ceil(this.content.length / 5),
-            //data: this.content.slice(0, 5),
-            search: '',
-            init() {
-                this.searchData();
-                pageCount = Math.ceil(this.content.length / 5),
-                data = this.content.slice(0, 5)
-            },
-            setCurrentPage(page) {
-                this.currentPage = page;
-                this.data = this.content.slice((page - 1) * this.pageSize, page * this.pageSize);
-            },
-            searchData() {
-                if (!this.search) {
-                    this.data = this.content.slice((this.currentPage - 1) * this.pageSize, this.currentPage * this.pageSize);
-                    return;
-                }
-                const filteredData = this.content.filter(item =>
-                    item.name.toLowerCase().includes(this.search.toLowerCase()) ||
-                    item.description.toLowerCase().includes(this.search.toLowerCase())
-                );
-                this.data = filteredData.slice(0, this.pageSize);
-            },
-            pushData() {
-                this.data.push({
-                    name: this.$refs.name.value,
-                    description: this.$refs.description.value
-                });
-            }
-        }));
-    })
-</script>
 </html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Div Form</title>
+    <link href="../scripts/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../scripts/alpinejs/dist/cdn.min.js" defer></script>
+</head>
+<body>
+<div class="container mt-5" x-data="app">
+    <a href="/" class="btn btn-primary mb-3">Back to Home</a>
+    <div class="mb-3">
+        <label for="search" class="form-label">Search</label>
+        <input type="text" id="search" name="search" class="form-control" x-model="search" @input="fetchProducts" placeholder="Search">
+    </div>
+
+    <hr/>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Date Created</th>
+            <th>Date Updated</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Text</th>
+            <th>Quantity</th>
+            <th>Available</th>
+        </tr>
+        </thead>
+        <tbody>
+        <template x-for="(product, i) in filteredProducts" :key="product.id">
+            <tr x-bind:class="{ 'table-danger': !product.available, 'table-success': product.available }">
+                <td x-text="product.id"></td>
+                <td x-text="product.dateCreated"></td>
+                <td x-text="product.dateUpdated"></td>
+                <td x-text="product.price"></td>
+                <td x-text="product.description"></td>
+                <td x-text="product.text"></td>
+                <td x-text="product.quantityAvailable"></td>
+                <td>
+                    <span x-text="product.available ? 'Yes' : 'No'"></span>
+                </td>
+            </tr>
+        </template>
+        </tbody>
+    </table>
+</div>
+</body>
+<script src="app.js"></script>
+</html>
