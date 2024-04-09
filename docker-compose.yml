@@ -82,7 +82,7 @@ services:
     ports:
       - "8004:80"
     environment:
-      PMA_HOST: db
+      PMA_HOST: db-service
       PMA_PORT: 3306
       MARIADB_ROOT_PASSWORD: ${DB_PASS}
     depends_on:

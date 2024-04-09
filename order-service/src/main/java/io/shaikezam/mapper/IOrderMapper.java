@@ -6,11 +6,12 @@ import io.shaikezam.persistence.entity.OrderEntity;
 import io.shaikezam.persistence.entity.OrderProductsEntity;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 
 import java.util.List;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.CDI, injectionStrategy = InjectionStrategy.CONSTRUCTOR)
+@Mapper(componentModel = MappingConstants.ComponentModel.CDI, injectionStrategy = InjectionStrategy.CONSTRUCTOR, uses = Temp.class)
 public interface IOrderMapper {
 
     OrderDTO orderEntityToOrderDTO(OrderEntity orderEntity);
@@ -26,6 +27,9 @@ public interface IOrderMapper {
     OrderEntity orderProductsDTOToOrderEntityProducts(OrderProductsDTO orderProductsDTO);
 
     List<OrderProductsDTO> orderProductsEntitiesToDTOS(List<OrderProductsEntity> entities);
+
+    @Mapping(source = "productId", target = "productName", qualifiedByName = "lol")
+    OrderProductsDTO orderProductEntityToDTO(OrderProductsEntity entity);
 
     List<OrderProductsEntity> ordersProductsDTOSToEntities(List<OrderProductsDTO> dtos);
 }
