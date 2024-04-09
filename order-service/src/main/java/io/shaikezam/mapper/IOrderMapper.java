@@ -11,7 +11,7 @@ import org.mapstruct.MappingConstants;
 
 import java.util.List;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.CDI, injectionStrategy = InjectionStrategy.CONSTRUCTOR, uses = Temp.class)
+@Mapper(componentModel = MappingConstants.ComponentModel.CDI, injectionStrategy = InjectionStrategy.CONSTRUCTOR, uses = OrderMapperHelper.class)
 public interface IOrderMapper {
 
     OrderDTO orderEntityToOrderDTO(OrderEntity orderEntity);
@@ -28,7 +28,7 @@ public interface IOrderMapper {
 
     List<OrderProductsDTO> orderProductsEntitiesToDTOS(List<OrderProductsEntity> entities);
 
-    @Mapping(source = "productId", target = "productName", qualifiedByName = "lol")
+    @Mapping(source = "productId", target = "productName", qualifiedByName = "fetchProductName")
     OrderProductsDTO orderProductEntityToDTO(OrderProductsEntity entity);
 
     List<OrderProductsEntity> ordersProductsDTOSToEntities(List<OrderProductsDTO> dtos);

@@ -35,6 +35,12 @@ public class ProductService implements IProductService {
     }
 
     @Override
+    public Optional<String> getProductName(long productId) {
+        List<String> productNames = productEntityDao.findProductNameById(productId);
+        return productNames.size() != 1 ? Optional.empty() : Optional.of(productNames.getFirst());
+    }
+
+    @Override
     public void updateProduct(long productId, ProductDTO productDTO) {
         ProductEntity productEntity = productEntityDao.findById(productId);
         productEntity.setPrice(productDTO.getPrice());

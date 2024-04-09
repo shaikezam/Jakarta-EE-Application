@@ -42,6 +42,15 @@ public class ProductResource {
 
     }
 
+    @GET
+    @Path("/{productId}/name")
+    public Response getProductName(@PathParam("productId") long productId) {
+        return productService.getProductName(productId)
+                .map(product -> Response.ok(product).build())
+                .orElse(Response.status(Response.Status.NOT_FOUND).entity("Product not found").build());
+
+    }
+
     @PUT
     @Path("/{productId}")
     public Response updateProduct(@PathParam("productId") long productId, ProductDTO productDTO) {

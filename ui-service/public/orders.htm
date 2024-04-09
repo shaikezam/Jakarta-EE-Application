@@ -35,7 +35,7 @@
                     <ul>
                         <template x-for="(orderProduct, j) in order.orderProducts" :key="j">
                             <li>
-                                Product ID: <span x-text="orderProduct.productId"></span>, Quantity: <span x-text="orderProduct.quantity"></span>
+                                Product Name: <b><span x-text="orderProduct.productName"></span></b>, Quantity: <b><span x-text="orderProduct.quantity"></span></b>
                             </li>
                         </template>
                     </ul>

@@ -18,7 +18,7 @@ public class ProductEntity extends AbstractEntity {
     @Column(name = "description", nullable = false)
     private String description;
     @Column(name = "name", nullable = false)
-    private String text;
+    private String name;
     @Column(name = "quantity_available", nullable = false)
     private int quantityAvailable;
     @Column(name = "is_available", nullable = false)

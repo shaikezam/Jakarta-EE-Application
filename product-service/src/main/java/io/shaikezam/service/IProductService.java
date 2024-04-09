@@ -10,6 +10,8 @@ public interface IProductService {
 
     Optional<ProductDTO> getProduct(long productId);
 
+    Optional<String> getProductName(long productId);
+
     void updateProduct(long productId, ProductDTO productDTO);
 
     void createNewProduct(ProductDTO productDTO);

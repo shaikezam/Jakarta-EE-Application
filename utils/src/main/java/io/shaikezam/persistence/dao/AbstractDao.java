@@ -4,6 +4,10 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Path;
+import jakarta.persistence.criteria.Root;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
@@ -12,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 public abstract class AbstractDao<T> {
 
-    private EntityManager entityManager;
+    protected EntityManager entityManager;
     private String tableName;
     private Class<T> clazz;
 
@@ -80,4 +84,6 @@ public abstract class AbstractDao<T> {
         return entityManager.createQuery("SELECT e FROM " + tableName + " e", clazz)
                 .getResultList();
     }
+
+
 }
