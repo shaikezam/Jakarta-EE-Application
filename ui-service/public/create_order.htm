@@ -16,6 +16,7 @@
         <input type="text" id="search" name="search" class="form-control" x-model="search" @input="fetchProducts" placeholder="Search">
     </div>
     <hr/>
+    <div x-data="{ quantities: Array(filteredProducts.length).fill(0) }">
     <table class="table">
         <thead>
         <tr>
@@ -44,13 +45,16 @@
                     <span x-text="product.available ? 'Yes' : 'No'"></span>
                 </td>
                 <td>
-                    <input type="number" class="form-control form-control-sm" x-data="{ number: 0 }" x-model="number" @input="number = Math.max(0, Math.min(product.quantityAvailable, parseInt(number)))" x-bind:disabled="!product.available">
+                    <input type="number" class="form-control form-control-sm" x-model="quantities[i]" @input="quantities[i] = Math.max(0, Math.min(product.quantityAvailable, parseInt(quantities[i])))" x-bind:disabled="!product.available">
                 </td>
             </tr>
         </template>
         </tbody>
     </table>
-    <button class="btn btn-primary btn-floating btn-lg" style="position: fixed; bottom: 20px; right: 20px;">Buy Now</button>
+
+    <button @click="console.log(quantities)">Print Quantities</button>
+    <button class="btn btn-primary btn-floating btn-lg" style="position: fixed; bottom: 20px; right: 20px;" x-on:click="buy">Buy Now</button>
+    </div>
 </div>
 </body>
 <script src="create_order.js"></script>

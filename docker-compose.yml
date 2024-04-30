@@ -39,6 +39,8 @@ services:
       ACTIVE_MQ_PASSWORD: ${ACTIVE_MQ_PASSWORD}
     depends_on:
       - db-service
+    ports:
+      - "8081:8080"
     networks:
       - app-network
 

@@ -25,6 +25,15 @@
                     .catch(error => {
                         console.error('Error fetching products:', error);
                     });
-            }
+            },
+            buy() {
+                for(let i = 0; i < this.products.length; i++) {
+                    const id = this.products[i].id;
+                    const quantity = this.quantities[i];
+                    if (quantity > 0) {
+                        console.log(`Product ID: ${id}, Quantity: ${quantity}`);
+                       }
+                    }
+                }
         }));
     });
