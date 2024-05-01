@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
 @RequiredArgsConstructor
-@ApplicationScoped
 public class JMSListenerServletContextListener implements ServletContextListener, MessageListener {
 
     private String activeMqUser = System.getenv("ACTIVE_MQ_USER");

@@ -41,7 +41,6 @@ public class OrderService implements IOrderService {
         orderEntityDao.update(orderEntity);
     }
 
-
     @Override
     public void createNewOrder(OrderDTO orderDto) {
         orderEntityDao.create(orderMapper.orderDTOToOrderEntity(orderDto));

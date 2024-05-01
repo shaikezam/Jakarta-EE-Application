@@ -1,6 +1,5 @@
 package io.shaikezam.model;
 
-import io.shaikezam.persistence.entity.OrderProductsEntity;
 import lombok.*;
 
 import java.util.HashSet;
