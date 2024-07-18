@@ -22,7 +22,7 @@ INSERT INTO PRODUCTS (name, price, quantity_available, is_available, description
     VALUES ('Smart Watch', 350.00, 0, FALSE, 'A smartwatch with fitness tracking and notifications.');
 
 INSERT INTO PRODUCTS (name, price, quantity_available, is_available, description)
-    VALUES ('Tablet', 500.9009, 4, TRUE, 'A versatile tablet for work and entertainment.');
+    VALUES ('Tablet', 500.00, 4, TRUE, 'A versatile tablet for work and entertainment.');
 
 INSERT INTO PRODUCTS (name, price, quantity_available, is_available, description)
     VALUES ('Camera', 400.00, 6, TRUE, 'A high-quality camera for photography enthusiasts.');

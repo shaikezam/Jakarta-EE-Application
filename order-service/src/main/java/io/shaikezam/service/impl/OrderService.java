@@ -1,7 +1,10 @@
 package io.shaikezam.service.impl;
 
 import io.shaikezam.mapper.IOrderMapper;
+import io.shaikezam.messaging.MessageProducer;
+import io.shaikezam.messaging.QueueConstants;
 import io.shaikezam.model.OrderDTO;
+import io.shaikezam.model.OrderProductsDTO;
 import io.shaikezam.persistence.entity.OrderEntity;
 import io.shaikezam.persistence.repository.OrderEntityDao;
 import io.shaikezam.service.IOrderService;
@@ -9,6 +12,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import lombok.RequiredArgsConstructor;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -19,6 +23,7 @@ public class OrderService implements IOrderService {
 
     private final OrderEntityDao orderEntityDao;
     private final IOrderMapper orderMapper;
+    private final MessageProducer messageProducer;
 
     private static final Logger logger = Logger.getLogger(OrderService.class.getName());
 
@@ -44,6 +49,9 @@ public class OrderService implements IOrderService {
     @Override
     public void createNewOrder(OrderDTO orderDto) {
         orderEntityDao.create(orderMapper.orderDTOToOrderEntity(orderDto));
+        HashSet<OrderProductsDTO> orderProductsDTOS = new HashSet<>(orderDto.getOrderProducts());
+        logger.info("Will send an order event " + orderProductsDTOS);
+        messageProducer.sendMessage(QueueConstants.BROKER_URL, QueueConstants.ORDER_COMPLETED_QUEUE_NAME, orderProductsDTOS);
     }
 
     @Override

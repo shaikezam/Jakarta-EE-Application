@@ -68,6 +68,10 @@
             <artifactId>jakarta.jms-api</artifactId>
         </dependency>
         <dependency>
+            <groupId>jakarta.enterprise</groupId>
+            <artifactId>jakarta.enterprise.cdi-api</artifactId>
+        </dependency>
+        <dependency>
             <groupId>io.shaikezam</groupId>
             <artifactId>utils</artifactId>
         </dependency>

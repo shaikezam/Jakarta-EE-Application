@@ -17,7 +17,7 @@
                 this.fetchProducts();
             },
             fetchProducts() {
-                fetch('/web/api/products')
+                fetch('/web/api/products/')
                     .then(response => response.json())
                     .then(data => {
                         this.products = data;
@@ -27,12 +27,36 @@
                     });
             },
             buy() {
+                let orderDTO = {
+                    price: 0,
+                    orderProducts: []
+                };
+                let cursor = 0;
                 for(let i = 0; i < this.products.length; i++) {
-                    const id = this.products[i].id;
+                    const productName = this.products[i].name;
+                    const productId = this.products[i].id;
+                    const price = this.products[i].price;
                     const quantity = this.quantities[i];
                     if (quantity > 0) {
-                        console.log(`Product ID: ${id}, Quantity: ${quantity}`);
+                        orderDTO.orderProducts[cursor] = {};
+                        orderDTO.orderProducts[cursor].productId = productId;
+                        orderDTO.orderProducts[cursor].productName = productName;
+                        orderDTO.orderProducts[cursor].quantity = quantity;
+                        console.log(`Product ID: ${productId}, Quantity: ${quantity}`);
+                        orderDTO.price += (quantity * price)
+                        cursor++;
                        }
+                    }
+                    if (orderDTO.price > 0) {
+                        console.log(orderDTO);
+                        orderDTO.userId = 1;
+                        fetch('/web/api/orders/', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(orderDTO),
+                        })
                     }
                 }
         }));

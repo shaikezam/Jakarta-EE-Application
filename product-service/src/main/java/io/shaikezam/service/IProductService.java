@@ -14,6 +14,8 @@ public interface IProductService {
 
     void updateProduct(long productId, ProductDTO productDTO);
 
+    void updateProductQuantity(long productId, int quantityToDecrease);
+
     void createNewProduct(ProductDTO productDTO);
 
     void deleteProduct(long productId);

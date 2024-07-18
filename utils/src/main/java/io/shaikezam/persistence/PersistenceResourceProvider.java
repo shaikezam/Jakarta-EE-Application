@@ -1,10 +1,12 @@
 package io.shaikezam.persistence;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.Default;
 import jakarta.enterprise.inject.Disposes;
 import jakarta.enterprise.inject.Produces;
+import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -40,17 +42,35 @@ public class PersistenceResourceProvider {
     }
 
     @Produces
-    @Default
+    @Named("requestScopedEntityManager")
     @RequestScoped
-    public EntityManager createEntityManager(EntityManagerFactory entityManagerFactory) {
-        logger.info("create EntityManager...");
+    public EntityManager createRequestScopedEntityManager(EntityManagerFactory entityManagerFactory) {
+        logger.info("create Request Scoped EntityManager...");
         return entityManagerFactory.createEntityManager();
     }
 
-    public void dispose(@Disposes @Default EntityManager entityManager) {
-        logger.info("dispose EntityManager...");
+    @Produces
+    @Named("normalScopedEntityManager")
+    @Dependent
+    public EntityManager createNormalScopedEntityManager(EntityManagerFactory entityManagerFactory) {
+        logger.info("create Normal Scoped EntityManager...");
+        return entityManagerFactory.createEntityManager();
+    }
+
+    public void disposeRequestScopedEntityManager(@Disposes @Named("requestScopedEntityManager") EntityManager entityManager) {
+        logger.info("dispose Request Scoped EntityManager...");
+        closeEntityManager(entityManager);
+    }
+
+    public void disposeNormalScopedEntityManager(@Disposes @Named("normalScopedEntityManager") EntityManager entityManager) {
+        logger.info("dispose Normal Scoped EntityManager...");
+        closeEntityManager(entityManager);
+    }
+
+    private void closeEntityManager(EntityManager entityManager) {
         if (entityManager.isOpen()) {
             entityManager.close();
         }
     }
 }
+

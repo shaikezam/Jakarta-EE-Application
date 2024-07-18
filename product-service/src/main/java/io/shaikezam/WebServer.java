@@ -11,6 +11,7 @@ import org.eclipse.jetty.servlet.ServletHolder;
 import org.glassfish.jersey.servlet.ServletContainer;
 import org.glassfish.jersey.servlet.ServletProperties;
 
+import java.util.HashSet;
 import java.util.logging.Logger;
 
 @ApplicationScoped
@@ -24,12 +25,16 @@ public class WebServer {
         Server server = new Server(8080);
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.addEventListener(new FlywayMigrationServletContextListener());
-        context.addEventListener(new JMSListenerServletContextListener(QueueConstants.BROKER_URL, QueueConstants.ORDER_COMPLETED_QUEUE_NAME));
+//        context.addEventListener(new JMSListenerServletContextListener<>(
+//                QueueConstants.BROKER_URL,
+//                QueueConstants.ORDER_COMPLETED_QUEUE_NAME,
+//                HashSet.class
+//        ));
         context.setContextPath("/");
         ServletHolder servletHolder = context.addServlet(ServletContainer.class, "/web/api/*");
         servletHolder.setInitOrder(1);
         servletHolder.setInitParameter(ServletProperties.JAXRS_APPLICATION_CLASS, ApplicationConfig.class.getName());
-        servletHolder.setInitParameter("cacheControl","max-age=0,public");
+        servletHolder.setInitParameter("cacheControl", "max-age=0,public");
 
         server.setHandler(context);
         server.start();

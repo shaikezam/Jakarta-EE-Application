@@ -17,7 +17,7 @@
                 this.fetchOrders();
             },
             fetchOrders() {
-                fetch('/web/api/orders')
+                fetch('/web/api/orders/')
                     .then(response => response.json())
                     .then(data => {
                         this.orders = data;

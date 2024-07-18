@@ -2,6 +2,7 @@ package io.shaikezam.persistence.dao;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -26,7 +27,7 @@ public abstract class AbstractDao<T> {
     }
 
     @Inject
-    public void setEntityManager(EntityManager entityManager) {
+    public void setEntityManager(@Named("normalScopedEntityManager") EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 

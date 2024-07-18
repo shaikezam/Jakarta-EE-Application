@@ -1,33 +1,40 @@
 package io.shaikezam.web.listener.messaging;
 
-import io.shaikezam.model.DummyDTO;
-import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.annotation.PostConstruct;
 import jakarta.jms.*;
-import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import lombok.RequiredArgsConstructor;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
+import java.util.Optional;
+import java.util.function.Consumer;
+
 @RequiredArgsConstructor
-public class JMSListenerServletContextListener implements ServletContextListener, MessageListener {
+public abstract class JMSListenerServletContextListener<T> implements ServletContextListener, MessageListener {
 
     private String activeMqUser = System.getenv("ACTIVE_MQ_USER");
     private String activeMqPassword = System.getenv("ACTIVE_MQ_PASSWORD");
     private final String brokerUrl;
     private final String destination;
+    private final Class<T> clazz;
 
     @Override
     public void onMessage(Message message) {
         try {
-            DummyDTO messageDTO = message.getBody(DummyDTO.class);
-            System.out.println(messageDTO);
+            T t = message.getBody(clazz);
+            this.handleMessage(t);
         } catch (JMSException e) {
             throw new RuntimeException(e);
         }
     }
 
-    @Override
-    public void contextInitialized(ServletContextEvent sce) {
+    @PostConstruct
+    public void init() {
+        // Initialization logic goes here
+        this.registerMessageConsumer();
+    }
+
+    public void registerMessageConsumer() {
         new Thread(() -> {
             ConnectionFactory connectionFactory = new org.apache.activemq.ActiveMQConnectionFactory(this.brokerUrl);
             ((ActiveMQConnectionFactory) connectionFactory).setTrustAllPackages(true);
@@ -39,11 +46,8 @@ public class JMSListenerServletContextListener implements ServletContextListener
                 throw new RuntimeException(e);
             }
         }).start();
-        ServletContextListener.super.contextInitialized(sce);
     }
 
-    @Override
-    public void contextDestroyed(ServletContextEvent sce) {
-        ServletContextListener.super.contextDestroyed(sce);
-    }
+    public abstract void handleMessage(T t);
+
 }

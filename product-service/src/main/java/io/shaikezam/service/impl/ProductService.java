@@ -6,6 +6,8 @@ import io.shaikezam.persistence.entity.ProductEntity;
 import io.shaikezam.persistence.repository.ProductEntityDao;
 import io.shaikezam.service.IProductService;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.Initialized;
+import jakarta.enterprise.event.Observes;
 import jakarta.inject.Inject;
 import lombok.RequiredArgsConstructor;
 
@@ -42,9 +44,13 @@ public class ProductService implements IProductService {
 
     @Override
     public void updateProduct(long productId, ProductDTO productDTO) {
-        ProductEntity productEntity = productEntityDao.findById(productId);
-        productEntity.setPrice(productDTO.getPrice());
-        productEntityDao.update(productEntity);
+        productMapper.productDTOToProductEntity(productDTO);
+        productEntityDao.update(productMapper.productDTOToProductEntity(productDTO));
+    }
+
+    @Override
+    public void updateProductQuantity(long productId, int quantityToDecrease) {
+        productEntityDao.decreaseProductQuantity(productId, quantityToDecrease);
     }
 
     @Override
