@@ -4,8 +4,8 @@ import io.shaikezam.config.ApplicationConfig;
 import io.shaikezam.web.listener.FlywayMigrationServletContextListener;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.servlet.ServletContextHandler;
-import org.eclipse.jetty.servlet.ServletHolder;
+import org.eclipse.jetty.ee10.servlet.ServletContextHandler;
+import org.eclipse.jetty.ee10.servlet.ServletHolder;
 import org.glassfish.jersey.servlet.ServletContainer;
 import org.glassfish.jersey.servlet.ServletProperties;
 
