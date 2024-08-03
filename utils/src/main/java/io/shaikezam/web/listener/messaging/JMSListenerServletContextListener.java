@@ -6,9 +6,6 @@ import jakarta.servlet.ServletContextListener;
 import lombok.RequiredArgsConstructor;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
-import java.util.Optional;
-import java.util.function.Consumer;
-
 @RequiredArgsConstructor
 public abstract class JMSListenerServletContextListener<T> implements ServletContextListener, MessageListener {
 

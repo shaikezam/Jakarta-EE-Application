@@ -23,7 +23,7 @@ public class ProductResource {
     private final IProductService productService;
 
     @GET
-    public Response getAllProducts() throws Exception {
+    public Response getAllProducts() {
         return Response.ok(productService.getAllProducts()).build();
     }
 

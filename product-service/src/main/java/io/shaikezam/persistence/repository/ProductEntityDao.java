@@ -5,19 +5,29 @@ import io.shaikezam.persistence.entity.ProductEntity;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityTransaction;
-import org.eclipse.persistence.config.QueryHints;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @ApplicationScoped
 public class ProductEntityDao extends AbstractDao<ProductEntity> {
+
+    private static final Logger logger = Logger.getLogger(ProductEntityDao.class.getName());
+
+    public static final String DECREASE_PRODUCT_QUANTITY = String.format("""
+            UPDATE %s p
+            SET p.quantityAvailable = p.quantityAvailable - :quantityToDecrease, 
+                p.dateUpdated = CURRENT_TIMESTAMP, 
+                p.isAvailable = CASE WHEN p.quantityAvailable - :quantityToDecrease <= 0 THEN false ELSE p.isAvailable END 
+            WHERE p.id = :productId
+            """, ProductEntity.TABLE_NAME);
 
     @Inject
     public ProductEntityDao() {
         super(ProductEntity.TABLE_NAME, ProductEntity.class);
     }
 
-    public List findProductNameById(Object id) {
+    public List<String> findProductNameById(Object id) {
         return entityManager.createQuery("SELECT p.name FROM " + ProductEntity.TABLE_NAME + " p WHERE p.id = :id")
                 .setParameter("id", id)
                 .getResultList();
@@ -27,15 +37,8 @@ public class ProductEntityDao extends AbstractDao<ProductEntity> {
         EntityTransaction transaction = entityManager.getTransaction();
         try {
             transaction.begin();
-            String query = String.format("""
-                    UPDATE %s p
-                    SET p.quantityAvailable = p.quantityAvailable - :quantityToDecrease, 
-                        p.dateUpdated = CURRENT_TIMESTAMP, 
-                        p.isAvailable = CASE WHEN p.quantityAvailable - :quantityToDecrease <= 0 THEN false ELSE p.isAvailable END 
-                    WHERE p.id = :productId
-                    """, ProductEntity.TABLE_NAME);
 
-            int rowsUpdated = entityManager.createQuery(query)
+            int rowsUpdated = entityManager.createQuery(DECREASE_PRODUCT_QUANTITY)
                     .setParameter("quantityToDecrease", quantityToDecrease)
                     .setParameter("productId", productId)
                     .executeUpdate();

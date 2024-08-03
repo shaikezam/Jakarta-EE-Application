@@ -1,8 +1,6 @@
 package io.shaikezam.persistence;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.context.Dependent;
-import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.Default;
 import jakarta.enterprise.inject.Disposes;
 import jakarta.enterprise.inject.Produces;
@@ -42,28 +40,15 @@ public class PersistenceResourceProvider {
     }
 
     @Produces
-    @Named("requestScopedEntityManager")
-    @RequestScoped
-    public EntityManager createRequestScopedEntityManager(EntityManagerFactory entityManagerFactory) {
-        logger.info("create Request Scoped EntityManager...");
+    @Named("applicationScopedEntityManager")
+    @ApplicationScoped
+    public EntityManager produceApplicationScopedEntityManager(EntityManagerFactory entityManagerFactory) {
+        logger.info("create Application Scoped EntityManager...");
         return entityManagerFactory.createEntityManager();
     }
 
-    @Produces
-    @Named("normalScopedEntityManager")
-    @Dependent
-    public EntityManager createNormalScopedEntityManager(EntityManagerFactory entityManagerFactory) {
-        logger.info("create Normal Scoped EntityManager...");
-        return entityManagerFactory.createEntityManager();
-    }
-
-    public void disposeRequestScopedEntityManager(@Disposes @Named("requestScopedEntityManager") EntityManager entityManager) {
-        logger.info("dispose Request Scoped EntityManager...");
-        closeEntityManager(entityManager);
-    }
-
-    public void disposeNormalScopedEntityManager(@Disposes @Named("normalScopedEntityManager") EntityManager entityManager) {
-        logger.info("dispose Normal Scoped EntityManager...");
+    public void disposeJmsScopedEntityManager(@Disposes @Named("applicationScopedEntityManager") EntityManager entityManager) {
+        logger.info("dispose Dependent Scoped EntityManager...");
         closeEntityManager(entityManager);
     }
 

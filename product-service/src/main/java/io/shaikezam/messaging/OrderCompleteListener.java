@@ -9,20 +9,26 @@ import jakarta.enterprise.event.Observes;
 import jakarta.inject.Inject;
 
 import java.util.HashSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @ApplicationScoped
 public class OrderCompleteListener extends JMSListenerServletContextListener<HashSet> {
 
+    private static final Logger logger = Logger.getLogger(OrderCompleteListener.class.getName());
     private final IProductService productService;
 
     @Inject
     public OrderCompleteListener(IProductService productService) {
+
         super(QueueConstants.BROKER_URL, QueueConstants.ORDER_COMPLETED_QUEUE_NAME, HashSet.class);
         this.productService = productService;
     }
 
     public void initialize(@Observes @Initialized(ApplicationScoped.class) Object init) {
-        // This method will be called when the application scope is initialized
+        // Force an application-scoped bean to instantiate at application startup
+        //The trick is to let the bean observe the initialization of the built-in lifecycle scopes, i.e. ApplicationScoped in this case.
+        // https://stackoverflow.com/a/32520226/5769672
     }
 
     @Override
@@ -33,8 +39,7 @@ public class OrderCompleteListener extends JMSListenerServletContextListener<Has
                             this.productService.updateProductQuantity(orderProductsDTO.getProductId(), orderProductsDTO.getQuantity()));
         } catch (Exception e) {
             // Print the stack trace
-            System.out.println("Exception occurred:");
-            e.printStackTrace(System.out);
+            logger.log(Level.SEVERE, "An exception occurred", e);
         }
     }
 }

@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @ApplicationScoped
@@ -50,8 +51,12 @@ public class OrderService implements IOrderService {
     public void createNewOrder(OrderDTO orderDto) {
         orderEntityDao.create(orderMapper.orderDTOToOrderEntity(orderDto));
         HashSet<OrderProductsDTO> orderProductsDTOS = new HashSet<>(orderDto.getOrderProducts());
-        logger.info("Will send an order event " + orderProductsDTOS);
         messageProducer.sendMessage(QueueConstants.BROKER_URL, QueueConstants.ORDER_COMPLETED_QUEUE_NAME, orderProductsDTOS);
+
+        if (logger.isLoggable(Level.INFO)) {
+            logger.info(String.format("Will send an order event %s", orderProductsDTOS));
+        }
+        //messageProducer.sendMessage(QueueConstants.BROKER_URL, QueueConstants.ORDER_COMPLETED_QUEUE_NAME, orderProductsDTOS);
     }
 
     @Override

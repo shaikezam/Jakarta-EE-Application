@@ -1,6 +1,5 @@
 package io.shaikezam.messaging;
 
-import io.shaikezam.model.DummyDTO;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.jms.ConnectionFactory;
 import jakarta.jms.JMSContext;

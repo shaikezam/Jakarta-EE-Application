@@ -29,7 +29,7 @@ public class OrderResource {
     }
 
     @POST
-    public Response createOrder(OrderDTO orderDTO) throws Exception {
+    public Response createOrder(OrderDTO orderDTO) {
         orderService.createNewOrder(orderDTO);
         return Response.accepted().build();
     }

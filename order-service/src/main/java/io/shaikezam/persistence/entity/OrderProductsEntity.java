@@ -12,7 +12,6 @@ import lombok.*;
 public class OrderProductsEntity extends AbstractEntity {
 
     public final static String TABLE_NAME = "ORDER_PRODUCTS";
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

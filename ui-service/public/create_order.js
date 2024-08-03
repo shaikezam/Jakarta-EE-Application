@@ -57,6 +57,9 @@
                             },
                             body: JSON.stringify(orderDTO),
                         })
+                        .then(
+                            data => { window.location.reload();
+                        })
                     }
                 }
         }));
