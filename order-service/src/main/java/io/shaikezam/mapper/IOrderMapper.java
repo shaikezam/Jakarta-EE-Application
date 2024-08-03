@@ -19,17 +19,7 @@ public interface IOrderMapper {
     OrderEntity orderDTOToOrderEntity(OrderDTO orderDTO);
 
     List<OrderDTO> orderEntitiesToDTOS(List<OrderEntity> entities);
-//
-//    List<OrderEntity> ordersDTOSToEntities(List<OrderDTO> dtos);
-//
-//    OrderDTO orderProductsEntityToOrderProductsDTO(OrderProductsEntity orderProductsEntity);
-//
-//    OrderEntity orderProductsDTOToOrderEntityProducts(OrderProductsDTO orderProductsDTO);
-//
-//    List<OrderProductsDTO> orderProductsEntitiesToDTOS(List<OrderProductsEntity> entities);
 
     @Mapping(source = "productId", target = "productName", qualifiedByName = "fetchProductName")
     OrderProductsDTO orderProductEntityToDTO(OrderProductsEntity entity);
-
-//    List<OrderProductsEntity> ordersProductsDTOSToEntities(List<OrderProductsDTO> dtos);
 }
