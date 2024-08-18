@@ -11,10 +11,6 @@
 <div class="container mt-5" x-data="app">
     <a href="/" class="btn btn-primary mb-3">Back to Home</a>
     <h2>Products</h2>
-    <div class="mb-3">
-        <label for="search" class="form-label">Search</label>
-        <input type="text" id="search" name="search" class="form-control" x-model="search" @input="fetchProducts" placeholder="Search">
-    </div>
     <hr/>
     <div x-data="{ quantities: Array(filteredProducts.length).fill(0) }">
     <table class="table">
@@ -51,8 +47,7 @@
         </template>
         </tbody>
     </table>
-
-    <button @click="console.log(quantities)">Print Quantities</button>
+        
     <button class="btn btn-primary btn-floating btn-lg" style="position: fixed; bottom: 20px; right: 20px;" x-on:click="buy">Buy Now</button>
     </div>
 </div>

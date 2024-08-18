@@ -20,7 +20,6 @@ public class OrderCompleteListener extends JMSListenerServletContextListener<Has
 
     @Inject
     public OrderCompleteListener(IProductService productService) {
-
         super(QueueConstants.BROKER_URL, QueueConstants.ORDER_COMPLETED_QUEUE_NAME, HashSet.class);
         this.productService = productService;
     }
